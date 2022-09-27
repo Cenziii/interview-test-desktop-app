@@ -1,0 +1,24 @@
+﻿<Application x:Class="DesktopAppTest.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DesktopAppTest"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<materialDesign:CustomColorTheme  BaseTheme="Dark" PrimaryColor="MediumAquamarine" SecondaryColor="DarkGreen"  />-->
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Dark.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Red.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="Window_General" TargetType="Window">
+                <Setter Property="FontFamily" Value="Sagemcom Type"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

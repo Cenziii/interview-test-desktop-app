@@ -1,0 +1,97 @@
+﻿<Window x:Class="DesktopAppTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopAppTest"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:resx="clr-namespace:DesktopAppTest.Resources.Strings"
+        mc:Ignorable="d"
+        Title="{x:Static resx:Mainwindow_Strings.Title}"
+        Height="450" Width="800"
+        Style="{StaticResource Window_General}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition 
+                Width="1*"/>
+            <ColumnDefinition
+                Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel 
+            Grid.Column="0"
+            Orientation="Vertical"
+            Margin="15">
+            <Button 
+                Content="{x:Static resx:Mainwindow_Strings.Btn_ReadUsers}" 
+                Margin="10"
+                Command="{Binding read_users_cmd.Comando}" 
+                HorizontalAlignment="Left"/>
+            <DataGrid
+                DockPanel.Dock="Bottom"
+                Style="{DynamicResource MaterialDesignDataGrid}"
+                ItemsSource="{Binding list}" 
+                CanUserAddRows="False"
+                SelectionUnit="Cell"
+                SelectionMode="Extended" 
+                AutoGenerateColumns="False"
+                VerticalContentAlignment="Stretch" 
+	            IsSynchronizedWithCurrentItem="True"
+	            ScrollViewer.VerticalScrollBarVisibility="Visible" 
+	            HorizontalContentAlignment="Stretch">
+                <DataGrid.Columns>
+                    <materialDesign:DataGridTextColumn 
+                        Header="{x:Static resx:Mainwindow_Strings.Dg_Header_FirstName}"  
+                        Binding="{Binding FirstName}"/>
+                    <materialDesign:DataGridTextColumn 
+                        Header="{x:Static resx:Mainwindow_Strings.Dg_Header_LastName}"
+                        Binding="{Binding LastName}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+        <StackPanel 
+            Grid.Column="1"
+            Orientation="Vertical"
+            Margin="15">
+            <GroupBox 
+                VerticalAlignment="Center"
+                materialDesign:ShadowAssist.ShadowDepth="Depth3"
+                BorderThickness="0"
+                Header="{x:Static resx:Mainwindow_Strings.GrpBox_Title}">
+                <StackPanel 
+                    Orientation="Vertical"
+                    VerticalAlignment="Top">
+                    <StackPanel 
+                    Orientation="Horizontal" >
+                        <Label 
+                        Content="{x:Static resx:Mainwindow_Strings.Lbl_FirstName}" 
+                        Width="110" 
+                        HorizontalContentAlignment="Right"/>
+                        <TextBox 
+                        IsEnabled="{Binding dest1.Dest_IsEnabled}"
+                        Width="140" 
+                        Text="{Binding mod_mw.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                        Foreground="White"/>
+                    </StackPanel>
+                    <StackPanel
+                        Orientation="Horizontal" 
+                        Height="30">
+                        <Label 
+                            Content="{x:Static resx:Mainwindow_Strings.Lbl_LastName}" 
+                            Width="110" 
+                            HorizontalContentAlignment="Right"/>
+                        <TextBox 
+                            IsEnabled="{Binding dest1.Dest_IsEnabled}"
+                            Width="140" 
+                            Text="{Binding mod_mw.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                            Foreground="White"/>
+                    </StackPanel>
+                    <Button 
+                        Content="{x:Static resx:Mainwindow_Strings.Btn_AddUser}" 
+                        Margin="10"
+                        Command="{Binding add_user_cmd.Comando}" 
+                        HorizontalAlignment="Center"/> 
+                </StackPanel>
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+</Window>
