@@ -124,26 +124,40 @@ namespace DesktopAppTest
 
         public async Task<string> GetRequestDataAsync(Uri fromUri)
         {
-            using (var _client = new HttpClient())
-            using (var msg = new HttpRequestMessage(HttpMethod.Get, fromUri))
-            using (var resp = await _client.SendAsync(msg))
+            try
             {
-                resp.EnsureSuccessStatusCode();
-                return await resp.Content.ReadAsStringAsync();
+                using (var _client = new HttpClient())
+                using (var msg = new HttpRequestMessage(HttpMethod.Get, fromUri))
+                using (var resp = await _client.SendAsync(msg))
+                {
+                    resp.EnsureSuccessStatusCode();
+                    return await resp.Content.ReadAsStringAsync();
+                }
+            }
+            catch(Exception)
+            {
+                return String.Empty;
             }
         }
 
         public async Task<HttpStatusCode> PostRequestDataAsync(Uri fromUri, string firstName, string lastName)
         {
-            var formContent = new FormUrlEncodedContent(new[]
+            try
             {
-                new KeyValuePair<string, string>("firstName", firstName),
-                new KeyValuePair<string, string>("lastName", lastName)
-            });
+                var formContent = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("firstName", firstName),
+                    new KeyValuePair<string, string>("lastName", lastName)
+                });
 
-            var myHttpClient = new HttpClient();
-            var response = await myHttpClient.PostAsync(fromUri, formContent);
-            return response.StatusCode;
+                var myHttpClient = new HttpClient();
+                var response = await myHttpClient.PostAsync(fromUri, formContent);
+                return response.StatusCode;
+            }
+            catch(Exception)
+            {
+                return HttpStatusCode.BadRequest;
+            }
         }
 
         #endregion
