@@ -59,8 +59,11 @@ namespace DesktopAppTest.Model
         public Model_MainWindow()
         {
             this.List = new ObservableCollection<User>();
+            this.Add_LastName = String.Empty;
+            this.Add_FirstName = String.Empty;
         }
         #endregion
+
     }
 
     internal class User

@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Reflection.Metadata;
 using System.Security.Policy;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -106,7 +107,12 @@ namespace DesktopAppTest
 
         private async void ReadUsers()
         {
-            string result_users_json = await GetRequestDataAsync(new Uri($"http://localhost:9000/api/users"));
+            this.Dispatcher.Invoke(() =>
+            {
+                this.Mod_MainWindow.List.Clear();
+            });
+
+                string result_users_json = await GetRequestDataAsync(new Uri($"http://localhost:9000/api/users"));
             Console.WriteLine(result_users_json);
             List < User > temp_list = JsonConvert.DeserializeObject<List<User>>(result_users_json);
             
@@ -158,7 +164,7 @@ namespace DesktopAppTest
             {
                 User user = new User(firstName, lastName);
                 var stringPayload = JsonConvert.SerializeObject(user);
-                var httpContent = new StringContent(stringPayload);
+                var httpContent = new StringContent(stringPayload, Encoding.UTF8, mediaType: "application/json");
 
                 var myHttpClient = new HttpClient();
                 var response = await myHttpClient.PostAsync(fromUri, httpContent);
