@@ -11,13 +11,13 @@ namespace DesktopAppTest.Model
     internal class Model_MainWindow : ModelBase
     {
         #region Attributes
-        List<User> list;
+        ObservableCollection<User> list;
         string add_lastName;
         string add_firstName;
         #endregion
 
         #region Properties
-        public List<User> List
+        public ObservableCollection<User> List
         {
             get
             {
@@ -58,7 +58,7 @@ namespace DesktopAppTest.Model
         #region Constructor
         public Model_MainWindow()
         {
-            this.List = new List<User>();
+            this.List = new ObservableCollection<User>();
         }
         #endregion
     }
@@ -72,7 +72,7 @@ namespace DesktopAppTest.Model
 
         #region Properties
         [JsonProperty("firstName")]
-        public string FistName
+        public string FirstName
         {
             get
             {
@@ -95,6 +95,19 @@ namespace DesktopAppTest.Model
                 lastName = value;
             }
         }
+
+        public User()
+        {
+
+        }
+
+        public User(string fistName,string lastName)
+        {
+            this.fistName = fistName;
+            this.lastName = lastName;
+        }
+
+
         #endregion
     }
 }

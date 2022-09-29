@@ -2,10 +2,13 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection.Metadata;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,7 +107,16 @@ namespace DesktopAppTest
         private async void ReadUsers()
         {
             string result_users_json = await GetRequestDataAsync(new Uri($"http://localhost:9000/api/users"));
-            this.Mod_MainWindow.List = JsonConvert.DeserializeObject<List<User>>(result_users_json);
+            Console.WriteLine(result_users_json);
+            List < User > temp_list = JsonConvert.DeserializeObject<List<User>>(result_users_json);
+            
+            this.Dispatcher.Invoke(() =>
+            {
+                for (int i = 0; i < temp_list.Count; i++)
+                {
+                    this.Mod_MainWindow.List.Add(temp_list[i]);
+                }
+            });
         }
 
         private async Task<bool> CreateNewUser()
@@ -144,14 +156,12 @@ namespace DesktopAppTest
         {
             try
             {
-                var formContent = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("firstName", firstName),
-                    new KeyValuePair<string, string>("lastName", lastName)
-                });
+                User user = new User(firstName, lastName);
+                var stringPayload = JsonConvert.SerializeObject(user);
+                var httpContent = new StringContent(stringPayload);
 
                 var myHttpClient = new HttpClient();
-                var response = await myHttpClient.PostAsync(fromUri, formContent);
+                var response = await myHttpClient.PostAsync(fromUri, httpContent);
                 return response.StatusCode;
             }
             catch(Exception)

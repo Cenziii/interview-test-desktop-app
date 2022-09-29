@@ -37,7 +37,7 @@
                 VerticalContentAlignment="Stretch" 
 	            IsSynchronizedWithCurrentItem="True"
 	            ScrollViewer.VerticalScrollBarVisibility="Visible" 
-	            HorizontalContentAlignment="Stretch">
+	            HorizontalContentAlignment="Stretch" Height="351">
                 <DataGrid.Columns>
                     <materialDesign:DataGridTextColumn 
                         Header="{x:Static resx:Mainwindow_Strings.Dg_Header_FirstName}"  
@@ -67,9 +67,8 @@
                         Width="110" 
                         HorizontalContentAlignment="Right"/>
                         <TextBox 
-                        IsEnabled="{Binding dest1.Dest_IsEnabled}"
                         Width="140" 
-                        Text="{Binding mod_mw.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                        Text="{Binding mod_mw.Add_FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                         Foreground="White"/>
                     </StackPanel>
                     <StackPanel
@@ -80,9 +79,8 @@
                             Width="110" 
                             HorizontalContentAlignment="Right"/>
                         <TextBox 
-                            IsEnabled="{Binding dest1.Dest_IsEnabled}"
                             Width="140" 
-                            Text="{Binding mod_mw.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
+                            Text="{Binding mod_mw.Add_LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" 
                             Foreground="White"/>
                     </StackPanel>
                     <Button 
